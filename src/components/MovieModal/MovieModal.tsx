@@ -16,9 +16,10 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
       }
     };
     window.addEventListener("keydown", handleClose);
-
+    document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", handleClose);
+      document.body.style.overflow = "";
     };
   }, []);
 

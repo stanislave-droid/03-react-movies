@@ -16,21 +16,15 @@ function App() {
   const [isLoadError, setIsLoadError] = useState<boolean>(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  const handleSubmit = (formData: FormData) => {
+  const handleSubmit = (input: string) => {
     setMovies([]);
     setIsLoading(true);
     setIsLoadError(false);
-    const input = formData.get("query") as string;
-    if (input.trim().length === 0) {
-      toast.error("Please enter your search query.");
-      return;
-    }
 
     fetchMovies({ page: 1, query: input.trim() })
       .then((movieResponse) => {
         if (movieResponse.length === 0) {
           toast.error("No movies found for your request.");
-          setIsLoadError(true);
           return;
         }
         setMovies(movieResponse);
@@ -44,8 +38,8 @@ function App() {
       });
   };
 
-  const handleSelect = (movieId: number) => {
-    setSelectedMovie(movies.find(({ id }) => id === movieId)!);
+  const handleSelect = (movie: Movie) => {
+    setSelectedMovie(movie);
   };
 
   const handleModalClose = () => {
