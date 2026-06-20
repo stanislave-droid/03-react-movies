@@ -2,7 +2,7 @@ import type { Movie } from "../../types/movie";
 import css from "./MovieGrid.module.css";
 
 interface MovieGridProps {
-  onSelect: (movieId: string) => void;
+  onSelect: (movieId: number) => void;
   movies: Movie[];
 }
 
@@ -13,7 +13,7 @@ export default function MovieGrid(props: MovieGridProps) {
         <li
           key={movie.id}
           onClick={(event: React.MouseEvent<HTMLLIElement>) =>
-            props.onSelect(event.currentTarget.dataset.id!)
+            props.onSelect(+event.currentTarget.dataset.id!)
           }
           data-id={movie.id}
         >

@@ -30,6 +30,7 @@ function App() {
       .then((movieResponse) => {
         if (movieResponse.length === 0) {
           toast.error("No movies found for your request.");
+          setIsLoadError(true);
           return;
         }
         setMovies(movieResponse);
@@ -43,8 +44,8 @@ function App() {
       });
   };
 
-  const handleSelect = (movieId: string) => {
-    setSelectedMovie(movies.find(({ id }) => id.toString() === movieId)!);
+  const handleSelect = (movieId: number) => {
+    setSelectedMovie(movies.find(({ id }) => id === movieId)!);
   };
 
   const handleModalClose = () => {
